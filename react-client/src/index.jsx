@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import TaskList from './components/TaskList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      tasks: ['alpha', 'bravo', 'charlie', 'delta'],
+      items: [] // remove this when tasks implemented
     }
   }
 
@@ -27,8 +29,10 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Item List</h1>
+      <button type="button">Create New Sprint</button>
+      <button type="button"></button>
       <List items={this.state.items}/>
+      <TaskList tasks={this.state.tasks}/>
     </div>)
   }
 }

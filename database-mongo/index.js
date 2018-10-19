@@ -1,9 +1,12 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test', {
+  useMongoClient: true
+});
 
 var db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', function(err) {
+  console.log(err);
   console.log('mongoose connection error');
 });
 
