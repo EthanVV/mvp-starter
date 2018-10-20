@@ -1,25 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import axios from 'axios';
 import TaskList from './components/TaskList.jsx';
+
+let url = 'localhost:3000'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      tasks: ['alpha', 'bravo', 'charlie', 'delta'],
-      items: [] // remove this when tasks implemented
+      tasks: ['alpha', 'bravo', 'charlie', 'delta']
     }
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/items', 
+      url: '/tasks', 
       success: (data) => {
-        this.setState({
-          items: data
-        })
+        console.log('componenet did mount');
+        // this.setState({
+        //   tasks: data
+        // })
       },
       error: (err) => {
         console.log('err', err);
@@ -29,9 +31,10 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <button type="button">Create New Sprint</button>
-      <button type="button"></button>
-      <List items={this.state.items}/>
+      <form>
+        <input type="text" name="New Task"></input>
+        <input type="submit" value="Create New Task"></input>
+      </form>
       <TaskList tasks={this.state.tasks}/>
     </div>)
   }

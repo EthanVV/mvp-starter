@@ -14,15 +14,21 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var taskSchema = new mongoose.Schema({
+  name: String,
+  blocks: []
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Task = mongoose.model('Task', taskSchema);
+
+var deposite = function(item, callback) {
+  var holder =  Task(item);
+
+  holder.save();
+};
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Task.find({}, function(err, items) {
     if(err) {
       callback(err, null);
     } else {
@@ -31,4 +37,4 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports.db = {deposite, selectAll};
